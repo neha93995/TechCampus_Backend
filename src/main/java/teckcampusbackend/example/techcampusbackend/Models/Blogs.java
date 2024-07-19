@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -50,10 +49,9 @@ public class Blogs {
 	    private Users user;
 
 	    @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	    @JsonIgnore
+//	    @JsonIgnore
 	    @JsonManagedReference(value = "blog-image")
 	    private List<Blog_image> images;
-
 
 
 		public Integer getId() {
@@ -137,6 +135,7 @@ public class Blogs {
 	                ", likes=" + likes +
 	                ", dislikes=" + dislikes +
 	                ", createAt=" + createAt +
+	                ", images="+ images +
 	                '}';
 	    }
 }

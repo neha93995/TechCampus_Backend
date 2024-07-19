@@ -52,7 +52,7 @@ public class Blog_image {
 
 		@Override
 		public String toString() {
-			return "Blog_image [id=" + id + ", image=" + image + ", blog=" + blog + "]";
+			return "Blog_image [id=" + id + ", image=" + image + "]";
 		}
 	    
 	    

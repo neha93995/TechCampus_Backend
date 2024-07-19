@@ -63,18 +63,20 @@ public class BlogController {
 	@GetMapping("/topic/{id}")
 	public List<Blogs> getBlogByTopic(@PathVariable("id") Integer topicId)
 	{
-		List<Blogs> allBlogs = blogRepo.findAllByTechTopicId(topicId);
-		System.out.println("--------------------------------"+allBlogs);
+		List<Blogs> allBlogs = null;
+		try {
+			System.out.println(topicId);
+			 allBlogs = blogRepo.findAllByTechTopicId(topicId);
+			System.out.println("--------------------------------"+allBlogs);
+			
+		}
+		catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return allBlogs;
-
 	}
 	
-	@GetMapping("/blog/{id}/images")
-	public List<Blog_image> getImagesOfBlog(@PathVariable("id") Integer id )
-	{
-		List<Blog_image> blogImages = blogImageRepo.findAllByBlogId(id);
-		return blogImages;
-	}
+	
 	
 	@GetMapping("/{id}")
 	public Optional<Blogs> getBlogsByID(@PathVariable("id") Integer id)
@@ -140,25 +142,25 @@ public class BlogController {
 					blogImage.setBlog(saveBlog);
 					blogImage.setImage(url);
 					imagesList.add(blogImage);
+					System.out.println("-------------  "+blogImage);
 					
 				
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
+					System.out.println(e.getMessage());
 				}
 
 	        }
 		}
 		
-		
-		
-		blogImageRepo.saveAll(imagesList);		
+		try {
+			blogImageRepo.saveAll(imagesList);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}		
 		return saveBlog;
-	}
-	
-	
-//	@PutMapping
-//	public Blog postBlog
-	
+	}	
 
 }
